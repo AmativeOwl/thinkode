@@ -5,6 +5,8 @@ export default function useProblems() {
     const [problems, setProblems] = useState([])
     const [loading, setLoading] = useState(true)
 
+    // Defines a custom React hook for managing the list of coding problems. It fetches the problems from the database on initial load and provides a function to add new problems. 
+    // The hook returns the current list of problems, a loading state, and the function to add problems, allowing components to easily access and manipulate the problem data.
     useEffect(() => {
         async function fetchProblems() {
             const { data, error } = await supabase
@@ -23,6 +25,8 @@ export default function useProblems() {
         fetchProblems()
     }, [])
 
+    // Adds a new problem to the database and updates the local state with the newly added problem. 
+    // It takes an object with the problem fields (title, difficulty, url) as input, inserts it into the 'problems' table, and upon success, appends the new problem to the existing list of problems in state.
     async function addProblem(fields) {
         const { data, error } = await supabase
             .from('problems')
