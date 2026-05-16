@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import useProblems from './hooks/useProblems'
+import { useState, useEffect } from 'react'
+import useProblems from './hooks/useProblems.js'
 import StartPage from './components/StartPage'
 import ProblemView from "./components/ProblemView"
 import AddProblemModal from "./components/AddProblemModal"
@@ -10,8 +10,20 @@ function App() {
   const { problems } = useProblems()
   const [activeProblemId, setActiveProblemId] = useState(null)
   const [showAddModal, setShowAddModal] = useState(false)
+  const [recentProblemIds, setRecentProblemIds] = useState([])
+
+  // Upon re-rendering, if activeProblemId is not null, add it to the front of recentProblemIds, ensuring no duplicates and a max length of 5
+  // Keeps a stack of recently viewed problems for easy access in the ProblemView sidebar
+  useEffect(() => {
+    if (!activeProblemId) return
+    setRecentProblemIds(prev => {
+      const filtered = prev.filter(id => id !== activeProblemId)
+      return [activeProblemId, ...filtered].slice(0, 5)
+    })
+  }, [activeProblemId])
 
   const activeProblem = problems.find(p => p.id === activeProblemId) ?? null
+  const recentProblems = recentProblemIds.map(id => problems.find(p => p.id === id)).filter(Boolean)
 
   return (
     <>
@@ -26,6 +38,8 @@ function App() {
         ) : (
           <ProblemView
             problem={activeProblem}
+            recentProblems={recentProblems}
+            onSelectProblem={(id) => setActiveProblemId(id)}
             onBack={() => setActiveProblemId(null)}
           />
         )
