@@ -6,8 +6,8 @@ import AddProblemModal from "./components/shared/AddProblemModal"
 import './App.css'
 
 function App() {
-  // destructure problems from the useProblems hook
-  const { problems } = useProblems()
+  // destructure problems and addProblem from the useProblems hook
+  const { problems, addProblem } = useProblems()
   const [activeProblemId, setActiveProblemId] = useState(null)
   const [showAddModal, setShowAddModal] = useState(false)
   const [recentProblemIds, setRecentProblemIds] = useState([])
@@ -28,7 +28,7 @@ function App() {
   return (
     <>
       {/* if no active problem, show start page, otherwise show problem view */}
-      {activeProblemId === null
+      {activeProblemId === null || !activeProblem
         ? (
           <StartPage
             problems={problems}
@@ -49,9 +49,10 @@ function App() {
       {showAddModal && (
         <AddProblemModal
           onClose={() => setShowAddModal(false)}
-          onAdd={(id) => {
+          onAdd={async (fields) => {
+            const newProblem = await addProblem(fields)
+            if (newProblem) setActiveProblemId(newProblem.id)
             setShowAddModal(false)
-            setActiveProblemId(id)
           }}
         />
       )}
