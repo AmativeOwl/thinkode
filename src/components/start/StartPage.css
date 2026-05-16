@@ -1,0 +1,106 @@
+.start-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+.start-page > h1 {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+.start-page > p {
+  color: var(--color-muted);
+  margin-bottom: 32px;
+}
+
+.start-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.start-header input {
+  flex: 1;
+}
+
+.start-header button {
+  background: var(--color-accent);
+  color: #fff;
+  padding: 8px 16px;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.start-header button:hover {
+  background: var(--color-accent-hover);
+}
+
+.filter {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.chip {
+  background: var(--color-surface);
+  color: var(--color-muted);
+  border: 1px solid var(--color-border);
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  text-transform: capitalize;
+}
+
+.chip:hover {
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+.chip.active {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.problem-grid > p {
+  color: var(--color-muted);
+  grid-column: 1 / -1;
+}
+
+.problem-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.problem-card:hover {
+  border-color: var(--color-accent);
+  background: var(--color-surface-raised);
+}
+
+.problem-card h2 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 6px;
+}
+
+.problem-card span {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}

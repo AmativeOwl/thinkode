@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import useProblems from './hooks/useProblems.js'
-import StartPage from './components/StartPage'
-import ProblemView from "./components/ProblemView"
-import AddProblemModal from "./components/AddProblemModal"
+import StartPage from './components/start/StartPage'
+import ProblemView from "./components/problem/ProblemView"
+import AddProblemModal from "./components/shared/AddProblemModal"
 import './App.css'
 
 function App() {

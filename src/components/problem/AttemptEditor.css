@@ -1,0 +1,40 @@
+.attempt-editor {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.attempt-editor textarea {
+  resize: vertical;
+  min-height: 160px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.attempt-editor .error {
+  font-size: 13px;
+  color: var(--color-hard);
+}
+
+.attempt-editor button[type="submit"] {
+  align-self: flex-end;
+  background: var(--color-accent);
+  color: #fff;
+  padding: 8px 20px;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+}
+
+.attempt-editor button[type="submit"]:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+}
+
+.attempt-editor button[type="submit"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

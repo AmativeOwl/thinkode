@@ -1,0 +1,48 @@
+.attempt-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.attempt-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.attempt-card__header span:first-child {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.attempt-card__header span:last-child {
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.attempt-card__steps {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.attempt-card__steps pre {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 13px;
+  color: var(--color-text);
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.7;
+}
+
+.attempt-card__feedback {
+  padding: 16px 20px;
+  background: #131b2e;
+  font-size: 14px;
+  color: var(--color-text);
+  line-height: 1.7;
+  white-space: pre-wrap;
+}

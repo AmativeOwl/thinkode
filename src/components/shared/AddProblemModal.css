@@ -1,0 +1,65 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  backdrop-filter: blur(2px);
+}
+
+.modal {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 28px;
+  width: 100%;
+  max-width: 440px;
+}
+
+.modal h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 20px;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.modal-actions button[type="button"] {
+  background: transparent;
+  color: var(--color-muted);
+  border: 1px solid var(--color-border);
+}
+
+.modal-actions button[type="button"]:hover {
+  color: var(--color-text);
+  border-color: var(--color-accent);
+}
+
+.modal-actions button[type="submit"] {
+  background: var(--color-accent);
+  color: #fff;
+  font-weight: 500;
+}
+
+.modal-actions button[type="submit"]:hover {
+  background: var(--color-accent-hover);
+}
+
+.modal-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
