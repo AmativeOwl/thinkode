@@ -17,7 +17,7 @@ export default function ProblemView({ problem, recentProblems, onSelectProblem, 
                 )}
             </div>
             
-            {/* Displays a horizontal list of recently viewed problems, allowing users to quickly switch between them without going back to the StartPage. It receives the list of recentProblems, the currently active problem ID for styling purposes, and the onSelectProblem callback to update the active problem when a tab is clicked. */}
+            {/* Displays a horizontal list of recently viewed problems, allowing users to quickly switch between them without going back to the StartPage.*/}
             <RecentTabs
                 recentProblems={recentProblems}
                 activeProblemId={problem.id}
