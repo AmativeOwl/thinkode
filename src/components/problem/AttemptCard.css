@@ -1,8 +1,8 @@
 .attempt-card {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
   border-radius: var(--radius);
   overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .attempt-card__header {
@@ -30,7 +30,7 @@
 }
 
 .attempt-card__steps pre {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-family: ui-monospace, Consolas, monospace;
   font-size: 13px;
   color: var(--color-text);
   white-space: pre-wrap;
@@ -40,9 +40,10 @@
 
 .attempt-card__feedback {
   padding: 16px 20px;
-  background: #131b2e;
+  background: #f3f4f6;
   font-size: 14px;
   color: var(--color-text);
   line-height: 1.7;
   white-space: pre-wrap;
+  border-left: 3px solid var(--color-accent);
 }

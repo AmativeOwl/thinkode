@@ -1,17 +1,18 @@
 :root {
-  --color-bg: #0f1117;
-  --color-surface: #1a1d2e;
-  --color-surface-raised: #20243a;
-  --color-border: #2a2d3e;
-  --color-text: #e2e8f0;
-  --color-muted: #64748b;
-  --color-accent: #6366f1;
-  --color-accent-hover: #818cf8;
-  --color-easy: #22c55e;
-  --color-medium: #f59e0b;
-  --color-hard: #ef4444;
-  --radius: 8px;
-  --radius-sm: 4px;
+  --color-bg: #E8E9EB;
+  --color-surface: #ffffff;
+  --color-border: #d1d5db;
+  --color-text: #1a1a1a;
+  --color-muted: #6b7280;
+  --color-accent: #111111;
+  --color-accent-hover: #333333;
+  --color-easy: #16a34a;
+  --color-medium: #d97706;
+  --color-hard: #dc2626;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --font: 'Atkinson Hyperlegible', sans-serif;
+  --font-heading: 'Fraunces', serif;
 }
 
 *, *::before, *::after {
@@ -20,10 +21,14 @@
   padding: 0;
 }
 
+html {
+  background-color: var(--color-bg);
+}
+
 body {
-  background: var(--color-bg);
+  background-color: #f0ece3;
   color: var(--color-text);
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font);
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -36,13 +41,13 @@ button {
   border: none;
   border-radius: var(--radius-sm);
   padding: 6px 14px;
-  transition: background 0.15s, color 0.15s;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
 }
 
 input, textarea, select {
   font-family: inherit;
   font-size: 14px;
-  background: var(--color-bg);
+  background: var(--color-surface);
   color: var(--color-text);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
@@ -55,8 +60,8 @@ input:focus, textarea:focus, select:focus {
   border-color: var(--color-accent);
 }
 
-select option {
-  background: var(--color-surface);
+h1, h2 {
+  font-family: var(--font-heading);
 }
 
 a {

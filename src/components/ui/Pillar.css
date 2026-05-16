@@ -1,0 +1,44 @@
+.pillar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100px;
+  height: 100%;
+  padding: 40px 0;
+}
+
+.pillar .capital-top {
+  width: 100%;
+  height: 8px;
+  border: 1px solid #8a7e6a;
+  border-bottom: none;
+}
+
+.pillar .capital {
+  width: 78%;
+  height: 6px;
+  border: 1px solid #8a7e6a;
+  border-bottom: none;
+}
+
+.pillar .shaft {
+  width: 44%;
+  flex: 1;
+  border-left: 1px solid #8a7e6a;
+  border-right: 1px solid #8a7e6a;
+  background: rgba(138, 126, 106, 0.06);
+}
+
+.pillar .base {
+  width: 78%;
+  height: 6px;
+  border: 1px solid #8a7e6a;
+  border-top: none;
+}
+
+.pillar .base-foot {
+  width: 100%;
+  height: 8px;
+  border: 1px solid #8a7e6a;
+  border-top: none;
+}
