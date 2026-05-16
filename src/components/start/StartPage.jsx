@@ -11,10 +11,12 @@ export default function StartPage({ problems, onSelectProblem, onAddProblem }) {
 
 
   return (
+    // The initial landing page of the app, displaying a searchable and filterable list of problems. Users can click on a problem to view its details or add a new problem using the button in the header.
     <div className="start-page">
       <h1>Thinkode</h1>
       <p>Welcome to Thinkode! Please select a problem to get started.</p>
 
+        {/* The header section of the StartPage, containing a search input for filtering problems by title and a button to open the AddProblemModal for adding new problems to the list. */}
         <div className="start-header">
             <input
                 type="text"
@@ -37,6 +39,7 @@ export default function StartPage({ problems, onSelectProblem, onAddProblem }) {
             ))}
         </div>
 
+        {/* The grid section of the StartPage, displaying a card for each problem that matches the current search and difficulty filters. Each card shows the problem title and difficulty, and is clickable to select that problem and view its details in the ProblemView. */}
         <div className="problem-grid">
             {filtered.map((problem) => (
                 <div
