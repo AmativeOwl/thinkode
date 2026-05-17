@@ -1,11 +1,28 @@
+.socrates-container {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    animation: walk-across 65s linear infinite;
+}
+
 .socrates-walk {
     width: 80px;
     height: 110px;
-    flex-shrink: 0;
+    animation: bounce 2.4s ease-in-out infinite;
 }
 
 .socrates-frame {
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+
+@keyframes walk-across {
+    from { transform: translateX(-100px); }
+    to   { transform: translateX(100vw); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0px); }
+    50%      { transform: translateY(-2px); }
 }
