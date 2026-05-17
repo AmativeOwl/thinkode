@@ -11,9 +11,11 @@ export default function AttemptCard({ attempt, index }) {
             <div className="attempt-card__steps">
                 <pre>{attempt.steps}</pre>
             </div>
-            {attempt.feedback && (
+            {attempt.feedback || "What assumptions are you making about the input?" && (
                 <div className="attempt-card__feedback">
-                    {attempt.feedback}
+                    <div className="speech-bubble">
+                        {attempt.feedback || "What assumptions are you making about the input?"}
+                    </div>
                 </div>
             )}
         </div>
