@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Pillar from "../ui/Pillar"
+import Socrates from "../ui/Socrates"
 import "./StartPage.css"
 
 export default function StartPage({ problems, onSelectProblem, onAddProblem }) {
@@ -55,6 +56,8 @@ export default function StartPage({ problems, onSelectProblem, onAddProblem }) {
                         </div>
                     ))}
                 </div>
+
+                <Socrates />
             </div>
             
             <Pillar />

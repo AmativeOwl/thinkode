@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { getSocraticFeedback } from '../../libs/anthropic.js'
+import { getSocraticFeedback } from '../../libs/gemini.js'
 import './AttemptEditor.css'
 
 export default function AttemptEditor({ onSubmit, problemTitle }) {

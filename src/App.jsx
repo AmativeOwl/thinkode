@@ -3,7 +3,6 @@ import useProblems from './hooks/useProblems.js'
 import StartPage from './components/start/StartPage'
 import ProblemView from "./components/problem/ProblemView"
 import AddProblemModal from "./components/shared/AddProblemModal"
-import Socrates from "./components/ui/Socrates"
 import './App.css'
 
 function App() {
@@ -45,8 +44,6 @@ function App() {
           />
         )
       }
-
-      <Socrates />
 
       {/* if showAddModal is true, show the AddProblemModal component */}
       {showAddModal && (

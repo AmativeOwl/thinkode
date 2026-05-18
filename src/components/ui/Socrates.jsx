@@ -33,7 +33,7 @@ export default function Socrates() {
             if (turningRef.current) return
 
             setX(prev => {
-                const maxX = window.innerWidth - 200 - 80 // 200 is the starting point, 80 is the width of Socrates
+                const maxX = window.innerWidth - 200 - 80
                 const minX = 200
 
                 if (prev >= maxX && directionRef.current === 'right') {
