@@ -1,7 +1,8 @@
 .attempt-list {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  flex-direction: row;
+  flex: 1;
+  min-height: 0;
 }
 
 .attempt-list > p {
@@ -9,4 +10,34 @@
   font-size: 14px;
   text-align: center;
   padding: 32px 0;
+}
+
+.attempt-list > form {
+  width: 50%;
+}
+
+.attempt-list-right {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+  min-height: 0;
+  min-width: 0;
+}
+
+.attempt-list-cards {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-all;
+  overflow-y: auto;
+  scrollbar-width: none;
+  padding-right: 8px;
+}
+
+.attempt-list-cards::-webkit-scrollbar {
+  display: none;
 }

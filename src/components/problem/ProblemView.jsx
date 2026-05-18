@@ -6,7 +6,7 @@ export default function ProblemView({ problem, recentProblems, onSelectProblem, 
     return (
         // The main view when a problem is selected. Shows the problem title, difficulty, and a list of attempts. Also includes a sidebar with recently viewed problems for easy navigation.
         <div className="problem-view">
-            <div className="problem-view__header">
+            <div className="problem-view-header">
                 <button onClick={onBack}>← Back</button>
                 <h1>{problem.title}</h1>
                 <span>{problem.difficulty}</span>
