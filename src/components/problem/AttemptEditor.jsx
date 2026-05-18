@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { getSocraticFeedback } from '../../libs/gemini.js'
 import './AttemptEditor.css'
 
-export default function AttemptEditor({ onSubmit, problemTitle }) {
+export default function AttemptEditor({ onSubmit, problemTitle, problemUrl }) {
     const [steps, setSteps] = useState('')
     const [submitting, setSubmitting] = useState(false)
     const [error, setError] = useState(null)
@@ -15,8 +15,8 @@ export default function AttemptEditor({ onSubmit, problemTitle }) {
         setError(null)
 
         try {
-            const feedback = await getSocraticFeedback(problemTitle, steps)
-            await onSubmit(steps, feedback)
+            const feedback = await getSocraticFeedback(problemTitle, steps, problemUrl)
+            await onSubmit(steps, feedback, problemUrl)
             setSteps('')
         } catch (err) {
             setError('Something went wrong getting feedback. Please try again.')

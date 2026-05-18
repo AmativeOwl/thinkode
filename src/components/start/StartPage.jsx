@@ -7,6 +7,7 @@ export default function StartPage({ problems, onSelectProblem, onAddProblem }) {
     const [search, setSearch] = useState('')
     const [difficulty, setDifficulty] = useState('all')
 
+    // Filters both by difficulty and case-insensitive title
     const filtered = problems
         .filter(p => difficulty === 'all' || p.difficulty === difficulty)
         .filter(p => p.title.toLowerCase().includes(search.toLowerCase()))

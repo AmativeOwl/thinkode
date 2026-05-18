@@ -10,6 +10,7 @@ import './Socrates.css'
 
 const framesRight = [socratesRightStand, socratesRight, socratesRightMid, socratesRight]
 const framesLeft = [socratesLeftStand, socratesLeft, socratesLeftMid, socratesLeft]
+const framesLength = 4
 
 export default function Socrates() {
     const [x, setX] = useState(200)
@@ -19,15 +20,19 @@ export default function Socrates() {
     const directionRef = useRef('right')
     const turningRef = useRef(false)
 
+    // iterating over the frames every 300ms to create a walking animation, but only if not currently turning
     useEffect(() => {
         const interval = setInterval(() => {
             if (!turningRef.current) {
-                setFrameIdx(prev => (prev + 1) % framesRight.length)
+                setFrameIdx(prev => (prev + 1) % framesLength)
             }
         }, 300)
         return () => clearInterval(interval)
     }, [])
 
+    // Moves Socrates horizontally across the screen, changing direction when reaching the edges. 
+    // It uses a setInterval to update the x position every 50ms, and checks if Socrates has reached the left or right bounds (200px and window width - 280px). 
+    // When an edge is reached, it triggers a turning animation by setting the turning state and using timeouts to switch direction after 800ms, during which the walking animation is paused.
     useEffect(() => {
         const interval = setInterval(() => {
             if (turningRef.current) return
@@ -67,6 +72,7 @@ export default function Socrates() {
         return () => clearInterval(interval)
     }, [])
 
+    // Determines which image frame to display based on the current direction and whether Socrates is turning.
     const currentFrames = direction === 'right' ? framesRight : framesLeft
     const src = turning ? socratesForward : currentFrames[frameIdx]
 

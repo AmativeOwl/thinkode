@@ -2,8 +2,8 @@ import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
 
-export async function getSocraticFeedback(problemTitle, steps) {
-  const userMessage = `I am attempting the LeetCode problem: "${problemTitle}". Here is my step-by-step logic before coding: ${steps}`;
+export async function getSocraticFeedback(problemTitle, steps, problemUrl) {
+  const userMessage = `I am attempting the LeetCode problem: "${problemTitle}". Here is my step-by-step logic before coding: ${steps}. Problem URL: ${problemUrl}`;
 
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
