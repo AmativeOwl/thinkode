@@ -107,11 +107,14 @@
 .panel-trigger {
     position: relative;
     background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .panel-trigger:hover {
     color: white;
-    background-color: #8a7e6a;
+    background-color: #cebb9b;
 }
 
 .panel-trigger::after {

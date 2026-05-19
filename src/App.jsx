@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import useProblems from './hooks/useProblems.js'
 import StartPage from './components/start/StartPage'
 import ProblemView from "./components/problem/ProblemView"
@@ -6,56 +7,51 @@ import AddProblemModal from "./components/shared/AddProblemModal"
 import './App.css'
 
 export default function App() {
-  // destructure problems and addProblem from the useProblems hook
-  const { problems, addProblem, updateProblem } = useProblems()
-  const [activeProblemId, setActiveProblemId] = useState(null)
+  const { problems, addProblem } = useProblems()
   const [showAddModal, setShowAddModal] = useState(false)
   const [recentProblemIds, setRecentProblemIds] = useState([])
+  const navigate = useNavigate()
 
-  // Upon re-rendering, if activeProblemId is not null, add it to the front of recentProblemIds, ensuring no duplicates and a max length of 5
-  // Keeps a stack of recently viewed problems for easy access in the ProblemView sidebar
-  useEffect(() => {
-    if (!activeProblemId) return
-    setRecentProblemIds(prev =>
-      prev.includes(activeProblemId) ? prev : [...prev, activeProblemId]
-    )
-  }, [activeProblemId])
-
-  function removeFromRecent(id) {
-    setRecentProblemIds(prev => prev.filter(p => p !== id))
+  function handleSelectProblem(id) {
+    setRecentProblemIds(prev => prev.includes(id) ? prev : [...prev, id])
+    navigate(`/problem/${id}`)
   }
 
-  const activeProblem = problems.find(p => p.id === activeProblemId) ?? null
+  function removeFromRecent(id) {
+    const updated = recentProblemIds.filter(p => p !== id)
+    setRecentProblemIds(updated)
+    if (updated.length === 0) navigate('/')
+  }
+
   const recentProblems = recentProblemIds.map(id => problems.find(p => p.id === id)).filter(Boolean)
 
   return (
     <>
-      {/* if no active problem, show start page, otherwise show problem view */}
-      {activeProblemId === null || !activeProblem
-        ? (
+      <Routes>
+        <Route path="/" element={
           <StartPage
             problems={problems}
-            onSelectProblem={(id) => setActiveProblemId(id)}
+            onSelectProblem={handleSelectProblem}
             onAddProblem={() => setShowAddModal(true)}
           />
-        ) : (
+        } />
+        <Route path="/problem/:id" element={
           <ProblemView
-            problem={activeProblem}
+            problems={problems}
             recentProblems={recentProblems}
-            onSelectProblem={(id) => setActiveProblemId(id)}
-            onBack={() => setActiveProblemId(null)}
+            onSelectProblem={handleSelectProblem}
+            onBack={() => navigate('/')}
             onRemoveRecent={removeFromRecent}
           />
-        )
-      }
+        } />
+      </Routes>
 
-      {/* if showAddModal is true, show the AddProblemModal component */}
       {showAddModal && (
         <AddProblemModal
           onClose={() => setShowAddModal(false)}
           onAdd={async (fields) => {
             const newProblem = await addProblem(fields)
-            if (newProblem) setActiveProblemId(newProblem.id)
+            if (newProblem) handleSelectProblem(newProblem.id)
             setShowAddModal(false)
           }}
         />
