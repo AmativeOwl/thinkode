@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import './Vine.css'
 
-const VINE_WIDTH = 50
+const VINE_WIDTH = 20
 const VINE_HEIGHT = 800
 const NUM_WAVES = 10
 
@@ -17,20 +17,7 @@ function generatePath() {
     return d
 }
 
-const FLOWERS = Array.from({ length: NUM_WAVES }, (_, i) => ({
-    pos: (i + 0.5) / NUM_WAVES,
-    side: i % 2 === 0 ? 'right' : 'left',
-}))
-
 const PATH = generatePath()
-
-function Berry() {
-    return (
-        <svg width="18" height="18" viewBox="0 0 18 18">
-            <circle cx="9" cy="6" r="3" fill="#0b006b" />
-        </svg>
-    )
-}
 
 export default function Vine({ scrollRef }) {
     const pathRef = useRef(null)
@@ -64,15 +51,6 @@ export default function Vine({ scrollRef }) {
             >
                 <path ref={pathRef} d={PATH} className="vine-path" />
             </svg>
-            {FLOWERS.map((flower, i) => (
-                <div
-                    key={i}
-                    className={`vine-flower vine-flower--${flower.side} ${progress >= flower.pos - 0.06 ? 'vine-flower--visible' : ''}`}
-                    style={{ top: `${flower.pos * 100}%` }}
-                >
-                    <Berry />
-                </div>
-            ))}
         </div>
     )
 }

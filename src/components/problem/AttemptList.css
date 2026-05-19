@@ -32,7 +32,7 @@
   gap: 20px;
   min-width: 0;
   overflow-wrap: break-word;
-  word-break: break-all;
+  word-wrap: break-word;
   overflow-y: auto;
   scrollbar-width: none;
   padding-right: 8px;
@@ -40,4 +40,15 @@
 
 .attempt-list-cards::-webkit-scrollbar {
   display: none;
+}
+
+.evolution-toggle {
+  width: 100%;
+  background-color: black;
+  color: white;
+  padding: 8px;
+}
+
+.evolution-toggle:hover {
+  background-color: grey;
 }

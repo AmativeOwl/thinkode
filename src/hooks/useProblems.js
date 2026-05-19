@@ -43,5 +43,22 @@ export default function useProblems() {
         return data
     }
 
-    return { problems, loading, addProblem }
+    async function updateProblem(id, fields) {
+        const { data, error } = await supabase
+            .from('problems')
+            .update(fields)
+            .eq('id', id)
+            .select()
+            .single()
+
+        if (error) {
+            console.error('Error updating problem:', error)
+            return null
+        }
+
+        setProblems(prev => prev.map(p => p.id === id ? data : p))
+        return data
+    }
+
+    return { problems, loading, addProblem, updateProblem }
 }

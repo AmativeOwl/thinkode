@@ -12,29 +12,7 @@
 
 .vine-path {
   fill: none;
-  stroke: #004c0e;
+  stroke: #8a7e6a;
   stroke-width: 2;
   stroke-linecap: round;
-}
-
-.vine-flower {
-  position: absolute;
-  opacity: 0;
-  transform: scale(0);
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.vine-flower--left {
-  left: -10px;
-  transform-origin: right center;
-}
-
-.vine-flower--right {
-  right: -10px;
-  transform-origin: left center;
-}
-
-.vine-flower--visible {
-  opacity: 1;
-  transform: scale(1);
 }

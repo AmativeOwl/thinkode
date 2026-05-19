@@ -22,28 +22,23 @@
 }
 
 .problem-view-header button {
-  background: var(--color-bg);
-  color: var(--color-muted);
-  border: 1px solid var(--color-border);
-  padding: 5px 12px;
-  font-size: 13px;
+    background: transparent;
+    border: none;
+    color: black;
+    font-size: 13px;
+    padding: 10px 16px;
 }
 
 .problem-view-header button:hover {
-  color: var(--color-text);
-  border-color: var(--color-accent);
-}
-
-.problem-view-header h1 {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--color-text);
+    background: var(--color-bg);
+    color: var(--color-text);
 }
 
 .problem-view-header span {
   font-size: 12px;
   font-weight: 600;
   text-transform: capitalize;
+  margin-right: 30px;
 }
 
 .problem-view-header a {
@@ -53,4 +48,89 @@
 
 .problem-view-header a:hover {
   color: var(--color-accent);
+}
+
+.problem-view-header svg {
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.problem-title {
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  width: 75%;
+  cursor: pointer;
+}
+
+.problem-title-input {
+  font-family: var(--font-heading);
+  font-size: 25px;
+  font-weight: 700;
+  width: 100%;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  padding: 0;
+}
+
+.tags {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+.tags a {
+  font-size: 12px;
+  color: goldenrod;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 4px 12px;
+  background-color: black;
+}
+
+.tags a:hover {
+  color: black;
+  background-color: white;
+  border-color: var(--color-accent);
+}
+
+.panel-icon {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px;
+}
+
+.panel-trigger {
+    position: relative;
+    background-color: transparent;
+}
+
+.panel-trigger:hover {
+    color: white;
+    background-color: #8a7e6a;
+}
+
+.panel-trigger::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-text);
+    color: var(--color-surface);
+    font-size: 15px;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+}
+
+.panel-trigger:hover::after {
+    opacity: 1;
 }

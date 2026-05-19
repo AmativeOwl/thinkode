@@ -5,9 +5,9 @@ import ProblemView from "./components/problem/ProblemView"
 import AddProblemModal from "./components/shared/AddProblemModal"
 import './App.css'
 
-function App() {
+export default function App() {
   // destructure problems and addProblem from the useProblems hook
-  const { problems, addProblem } = useProblems()
+  const { problems, addProblem, updateProblem } = useProblems()
   const [activeProblemId, setActiveProblemId] = useState(null)
   const [showAddModal, setShowAddModal] = useState(false)
   const [recentProblemIds, setRecentProblemIds] = useState([])
@@ -16,11 +16,14 @@ function App() {
   // Keeps a stack of recently viewed problems for easy access in the ProblemView sidebar
   useEffect(() => {
     if (!activeProblemId) return
-    setRecentProblemIds(prev => {
-      const filtered = prev.filter(id => id !== activeProblemId)
-      return [activeProblemId, ...filtered].slice(0, 5)
-    })
+    setRecentProblemIds(prev =>
+      prev.includes(activeProblemId) ? prev : [...prev, activeProblemId]
+    )
   }, [activeProblemId])
+
+  function removeFromRecent(id) {
+    setRecentProblemIds(prev => prev.filter(p => p !== id))
+  }
 
   const activeProblem = problems.find(p => p.id === activeProblemId) ?? null
   const recentProblems = recentProblemIds.map(id => problems.find(p => p.id === id)).filter(Boolean)
@@ -41,6 +44,7 @@ function App() {
             recentProblems={recentProblems}
             onSelectProblem={(id) => setActiveProblemId(id)}
             onBack={() => setActiveProblemId(null)}
+            onRemoveRecent={removeFromRecent}
           />
         )
       }
@@ -59,5 +63,3 @@ function App() {
     </>
   )
 }
-
-export default App
