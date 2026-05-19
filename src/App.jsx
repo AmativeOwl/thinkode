@@ -7,7 +7,7 @@ import AddProblemModal from "./components/shared/AddProblemModal"
 import './App.css'
 
 export default function App() {
-  const { problems, addProblem } = useProblems()
+  const { problems, addProblem, updateProblem, deleteProblem } = useProblems()
   const [showAddModal, setShowAddModal] = useState(false)
   const [recentProblemIds, setRecentProblemIds] = useState([])
   const navigate = useNavigate()
@@ -33,6 +33,8 @@ export default function App() {
             problems={problems}
             onSelectProblem={handleSelectProblem}
             onAddProblem={() => setShowAddModal(true)}
+            onEditProblem={updateProblem}
+            onDeleteProblem={deleteProblem}
           />
         } />
         <Route path="/problem/:id" element={
@@ -48,6 +50,7 @@ export default function App() {
 
       {showAddModal && (
         <AddProblemModal
+          problems={problems}
           onClose={() => setShowAddModal(false)}
           onAdd={async (fields) => {
             const newProblem = await addProblem(fields)

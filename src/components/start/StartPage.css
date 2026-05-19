@@ -104,6 +104,8 @@
   cursor: pointer;
   transition: box-shadow 0.15s, transform 0.1s;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
 }
 
 .problem-card:hover {
@@ -119,7 +121,81 @@
 }
 
 .problem-card span {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   text-transform: capitalize;
+}
+
+.problem-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 12px;
+}
+
+.problem-card-edit,
+.problem-card-delete {
+  background: transparent;
+  border: none;
+  color: var(--color-muted);
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.problem-card-edit:hover {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.problem-card-delete:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.problem-card-confirm {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.confirm-yes,
+.confirm-no {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+}
+
+.confirm-yes {
+  background: #dc2626;
+  color: #fff;
+  border-color: #dc2626;
+}
+
+.confirm-no {
+  background: transparent;
+  color: var(--color-muted);
+}
+
+.confirm-no:hover {
+  color: var(--color-text);
+  border-color: var(--color-text);
+}
+
+.no-results-icon {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 80px 0;
+  color: var(--color-muted);
 }

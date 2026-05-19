@@ -60,5 +60,20 @@ export default function useProblems() {
         return data
     }
 
-    return { problems, loading, addProblem, updateProblem }
+    async function deleteProblem(id) {
+        const { error } = await supabase
+            .from('problems')
+            .delete()
+            .eq('id', id)
+
+        if (error) {
+            console.error('Error deleting problem:', error)
+            return false
+        }
+
+        setProblems(prev => prev.filter(p => p.id !== id))
+        return true
+    }
+
+    return { problems, loading, addProblem, updateProblem, deleteProblem }
 }
