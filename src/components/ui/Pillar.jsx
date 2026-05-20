@@ -1,6 +1,6 @@
 import "./Pillar.css"
 
-// Determines the visual representation of a pillar
+// determines the visual representation of a pillar
 export default function Pillar() {
     return (
         <div className="pillar">

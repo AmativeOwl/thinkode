@@ -5,8 +5,7 @@ export default function useProblems() {
     const [problems, setProblems] = useState([])
     const [loading, setLoading] = useState(true)
 
-    // Manages the list of coding problems, fetching the problems from the database on initial load. 
-    // Returns the current list of problems, a loading state, and the function to add problems.
+    // fetches the list of problems from the database upon initial load
     useEffect(() => {
         async function fetchProblems() {
             const { data, error } = await supabase
@@ -25,8 +24,7 @@ export default function useProblems() {
         fetchProblems()
     }, [])
 
-    // Adds a new problem to the database and updates the local state with the newly added problem. 
-    // It takes an object with the problem fields (title, difficulty, url) as input, inserts it into the 'problems' table, and upon success, appends the new problem to the existing list of problems in state.
+    // Adds a new problem to the database and updates the array of problems in state 
     async function addProblem(fields) {
         const { data, error } = await supabase
             .from('problems')
@@ -43,6 +41,7 @@ export default function useProblems() {
         return data
     }
 
+    // updating an existing problem in the database, reflecting the change in the array of problems in state
     async function updateProblem(id, fields) {
         const { data, error } = await supabase
             .from('problems')
@@ -60,6 +59,7 @@ export default function useProblems() {
         return data
     }
 
+    // deletes a problem from the database and removes it from the array of problems in state
     async function deleteProblem(id) {
         const { error } = await supabase
             .from('problems')

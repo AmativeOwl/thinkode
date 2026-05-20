@@ -2,9 +2,11 @@ import { useState } from 'react'
 import "./Panel.css"
 
 export default function Panel({ title, isOpen, onClose, tabs }) {
+    // manages the "active" state of the tabs within the panel with null-safety checks
     const [activeTab, setActiveTab] = useState(tabs[0].id)
     const activeContent = tabs.find(t => t.id === activeTab)?.content
 
+    // rendering panel with header, tab navigation and content area
     return (
         <div className={`panel ${isOpen ? 'panel--open' : ''}`}>
             <div className="panel-header">

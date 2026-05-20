@@ -5,8 +5,7 @@ export default function useAttempts(problemId) {
     const [attempts, setAttempts] = useState([])
     const [loading, setLoading] = useState(true)
 
-    // Retrieve a list of attempts for a given problem from the database, and provide a function to add new attempts. 
-    // Each attempt includes the steps taken and feedback received, allowing users to track their problem-solving process over time.
+    // retrieves the list of attempts for a problem ID from the database, updating the attempts and loading states.
     useEffect(() => {
         async function fetchAttempts() {
             const { data, error } = await supabase
@@ -31,8 +30,7 @@ export default function useAttempts(problemId) {
         }
     }, [problemId])
 
-    // Adding a new attempt involves inserting a record into the 'attempts' table with the associated problem ID, steps taken, and feedback received. 
-    // After successfully adding the attempt to the database, it updates the local state to include the new attempt in the list.
+    // adds a new attempt to the database for a problem ID, updating the attempts state with the newly added attempt.
     async function addAttempt(steps, feedback) {
         const { data, error } = await supabase
             .from('attempts')
