@@ -2,20 +2,24 @@ import { useState } from 'react'
 import "./AddProblemModal.css"
 
 export default function AddProblemModal({ onClose, onAdd, onEdit, problems = [], initialValues = null }) {
+    // determines if modal is "add" or "edit" based on presence of initial values
     const isEditing = !!initialValues
 
+    // initialises form fields with either provided default values or empty strings
     const [title, setTitle] = useState(initialValues?.title ?? '')
     const [difficulty, setDifficulty] = useState(initialValues?.difficulty ?? 'easy')
     const [url, setUrl] = useState(initialValues?.url ?? '')
     const [description, setDescription] = useState(initialValues?.description ?? '')
     const [submitted, setSubmitted] = useState(false)
 
+    // validation checks for the title field (no blank or duplicates, ignoring case and excluding the current problem when editing)
     const trimmed = title.trim()
     const isEmpty = !trimmed
     const isDuplicate = !isEmpty && problems.some(p =>
         p.title.toLowerCase() === trimmed.toLowerCase() && p.title !== initialValues?.title
     )
 
+    // handles form submission with empty and duplicate value verifications
     function handleSubmit() {
         setSubmitted(true)
         if (isEmpty || isDuplicate) return
@@ -24,6 +28,7 @@ export default function AddProblemModal({ onClose, onAdd, onEdit, problems = [],
         else onAdd(fields)
     }
 
+    // renders the modal with form fields for title, difficulty, url and description
     return (
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal" onClick={(e) => e.stopPropagation()}>

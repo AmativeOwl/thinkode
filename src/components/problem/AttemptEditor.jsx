@@ -7,6 +7,7 @@ export default function AttemptEditor({ onSubmit, problemTitle, problemUrl }) {
     const [submitting, setSubmitting] = useState(false)
     const [error, setError] = useState(null)
 
+    // handles the submission of a new attempt, collecting feedback from Gemini
     async function handleSubmit(e) {
         e.preventDefault()
         if (!steps.trim()) return
@@ -26,6 +27,7 @@ export default function AttemptEditor({ onSubmit, problemTitle, problemUrl }) {
         }
     }
 
+    // renders a textarea for writing attempt steps with error highlighting
     return (
         <form onSubmit={handleSubmit}>
             <textarea

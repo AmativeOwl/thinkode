@@ -9,17 +9,22 @@ import "./ProblemView.css"
 import DescriptionImport from './DescriptionImport'
 
 export default function ProblemView({ problems, recentProblems, onSelectProblem, onBack, onRemoveRecent }) {
+    // retrieves the problem id from URL parameters, using it to fetch attempts and the panel's state
     const { id } = useParams()
     const { attempts, addAttempt } = useAttempts(id)
     const [panelOpen, setPanelOpen] = useState(false)
 
+    // finds the current problem based on id, rendering the problem details, recent tabs, description, attempt editor and panel if found
     const problem = problems.find(p => p.id === id)
     if (!problem) {
         return (
             <div className="problem-view">
                 <div className="problem-view-header">
                     <button onClick={onBack}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 8L2 12L6 16"/><path d="M2 12H22"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M6 8L2 12L6 16"/>
+                            <path d="M2 12H22"/>
+                        </svg>
                         Back
                     </button>
                     <div className="problem-title">
@@ -34,7 +39,10 @@ export default function ProblemView({ problems, recentProblems, onSelectProblem,
         <div className="problem-view">
             <div className="problem-view-header">
                 <button onClick={onBack}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 8L2 12L6 16"/><path d="M2 12H22"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M6 8L2 12L6 16"/>
+                        <path d="M2 12H22"/>
+                    </svg>
                     Back
                 </button>
                 <div className="problem-title">
@@ -57,10 +65,13 @@ export default function ProblemView({ problems, recentProblems, onSelectProblem,
             />
 
             {problem.description && <DescriptionImport problemDescription={problem.description} />}
-            
+
             <div className="panel-icon">
                 <button className="panel-trigger" data-tooltip="Attempts" onClick={() => setPanelOpen(true)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                        <path d="M3 3v5h5"/>
+                    </svg>
                 </button>
                 <Panel
                     title="Attempts"

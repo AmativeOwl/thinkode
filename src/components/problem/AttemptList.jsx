@@ -7,7 +7,7 @@ export default function AttemptList({ attempts }) {
     const [showEvolution, setShowEvolution] = useState(false)
     const cardsRef = useRef(null)
 
-    // Displays a list of attempts for the currently active problem.
+    // displays a list of attempts for the currently active problem.
     return (
         <div className="attempt-list">
             <div className="attempt-list-right">

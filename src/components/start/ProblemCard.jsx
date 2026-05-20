@@ -4,6 +4,7 @@ import "./ProblemCard.css"
 export default function ProblemCard({ problem, onSelect, onEdit, onDelete }) {
     const [confirmingDelete, setConfirmingDelete] = useState(false)
 
+    // renders the problem card with title, difficulty and edit/delete actions, handling delete confirmation
     return (
         <div
             className="problem-card"

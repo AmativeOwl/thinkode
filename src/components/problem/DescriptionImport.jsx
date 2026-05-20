@@ -4,6 +4,7 @@ import { useState } from "react"
 export default function DescriptionImport({ problemDescription }) {
     const [expanded, setExpanded] = useState(true)
 
+    // render an expandable section for the problem description
     return (
         <div className="problem-description-container">
             <button className="description-toggle" onClick={() => setExpanded(prev => !prev)}>
