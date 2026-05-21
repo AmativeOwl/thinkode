@@ -1,3 +1,38 @@
+@import './ExampleTabs.css';
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.skeleton-line,
+.skeleton-feedback {
+  border-radius: 6px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+.skeleton-line {
+  height: 12px;
+  width: 100%;
+}
+
+.skeleton-line--short  { width: 40%; }
+.skeleton-line--medium { width: 65%; }
+
+.skeleton-feedback {
+  height: 60px;
+  margin-top: 6px;
+}
+
 .attempt-card-steps pre {
   white-space: pre-wrap;
   overflow-wrap: break-word;

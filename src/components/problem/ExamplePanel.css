@@ -1,0 +1,108 @@
+@import './ExampleTabs.css';
+
+.example-edit-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.example-btn-cancel {
+  font-size: 12px;
+  padding: 5px 14px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-muted);
+  cursor: pointer;
+}
+
+.example-btn-cancel:hover {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.example-btn-save {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 14px;
+  background: #111;
+  color: #fff;
+  border: 1px solid #111;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.example-btn-save:hover {
+  background: #333;
+  border-color: #333;
+}
+
+.example-display-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.example-action-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-muted);
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.example-action-btn:hover {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.example-action-btn--delete:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.example-confirm-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0 4px;
+  font-size: 13px;
+  color: var(--color-text);
+}
+
+.example-confirm-area .confirm-yes {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  background: #dc2626;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.example-confirm-area .confirm-yes:hover {
+  background: #b91c1c;
+}
+
+.example-confirm-area .confirm-no {
+  font-size: 12px;
+  padding: 4px 12px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-muted);
+  cursor: pointer;
+}
+
+.example-confirm-area .confirm-no:hover {
+  background: var(--color-bg);
+  color: var(--color-text);
+}

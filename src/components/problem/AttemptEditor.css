@@ -4,12 +4,13 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-.attempt-editor textarea {
-  resize: vertical;
+.attempt-editor > textarea {
+  resize: none;
+  overflow: hidden;
   min-height: 160px;
   font-family: ui-monospace, Consolas, monospace;
   font-size: 13px;
@@ -22,7 +23,7 @@
   color: var(--color-hard);
 }
 
-.attempt-editor button[type="submit"] {
+.attempt-editor-submit {
   align-self: flex-end;
   background: var(--color-accent);
   color: #fff;
@@ -31,11 +32,11 @@
   border-radius: var(--radius-sm);
 }
 
-.attempt-editor button[type="submit"]:hover:not(:disabled) {
+.attempt-editor-submit:hover:not(:disabled) {
   background: var(--color-accent-hover);
 }
 
-.attempt-editor button[type="submit"]:disabled {
+.attempt-editor-submit:disabled {
   opacity: 0.45;
   cursor: not-allowed;
 }
