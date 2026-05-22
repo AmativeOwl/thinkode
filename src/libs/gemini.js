@@ -18,3 +18,19 @@ export async function getSocraticFeedback(problemTitle, steps, problemUrl) {
   })
   return response.text;
 }
+
+export async function getHint(problemTitle, steps, problemUrl) {
+  const userMessage = `I am attempting: "${problemTitle}". My current thinking: ${steps}. Problem URL: ${problemUrl}`;
+
+  const response = await ai.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: userMessage,
+    config: {
+      systemInstruction: "You are a coding mentor. Give the student exactly one small nudge — a direction to think in, not a solution or algorithm. One sentence only.",
+      thinkingConfig: { 
+        thinkingBudget: 0 
+      }
+    }
+  })
+  return response.text;
+}

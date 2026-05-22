@@ -2,13 +2,13 @@
   max-width: 90%;
   margin: 0 auto;
   padding: 32px 24px;
-  height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
+
 .problem-view-header {
+  flex-shrink: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -99,6 +99,7 @@
 }
 
 .panel-icon {
+  flex-shrink: 0;
   display: flex;
   justify-content: flex-end;
   margin: 10px;

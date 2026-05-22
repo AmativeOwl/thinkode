@@ -1,26 +1,26 @@
 import { useState } from 'react'
-import { getSocraticFeedback } from '../../libs/gemini.js'
+import { getSocraticFeedback, getHint } from '../../libs/gemini.js'
 import './AttemptEditor.css'
 
 export default function AttemptEditor({ onSubmit, onOpenPanel, onLoadingChange, problemTitle, problemUrl }) {
-    // handles user input, submission states and error handling
     const [steps, setSteps] = useState('')
     const [submitting, setSubmitting] = useState(false)
     const [error, setError] = useState(null)
+    const [hint, setHint] = useState(null)
+    const [hintLoading, setHintLoading] = useState(false)
 
-    // ensures that the textarea grows in height as more content fills
     function autoGrow(e) {
         e.target.style.height = 'auto'
         e.target.style.height = e.target.scrollHeight + 'px'
     }
 
-    // retrieves Socratic feedback from Gemini based on the user's input steps 
     async function handleSubmit(e) {
         e.preventDefault()
         if (!steps.trim()) return
 
         const captured = steps
         setSteps('')
+        setHint(null)
         setSubmitting(true)
         setError(null)
         onOpenPanel()
@@ -38,7 +38,21 @@ export default function AttemptEditor({ onSubmit, onOpenPanel, onLoadingChange, 
         }
     }
 
-    // renders the attempt editor with a textarea for input and a submit button with error handling
+    async function handleHint() {
+        if (!steps.trim() || hintLoading) return
+        setHintLoading(true)
+        setHint(null)
+        try {
+            const result = await getHint(problemTitle, steps, problemUrl)
+            setHint(result)
+        } catch (err) {
+            setHint('Could not get a hint. Please try again.')
+            console.error(err)
+        } finally {
+            setHintLoading(false)
+        }
+    }
+
     return (
         <form className="attempt-editor" onSubmit={handleSubmit}>
             <textarea
@@ -48,10 +62,21 @@ export default function AttemptEditor({ onSubmit, onOpenPanel, onLoadingChange, 
                 disabled={submitting}
                 placeholder="Write your logic here before coding..."
             />
+            {hint && <p className="attempt-editor-hint">{hint}</p>}
             {error && <p className="error">{error}</p>}
-            <button type="submit" className="attempt-editor-submit" disabled={submitting || !steps.trim()}>
-                {submitting ? 'Getting feedback...' : 'Submit'}
-            </button>
+            <div className="attempt-editor-actions">
+                <button
+                    type="button"
+                    className="attempt-editor-hint-btn"
+                    onClick={handleHint}
+                    disabled={submitting || hintLoading || !steps.trim()}
+                >
+                    {hintLoading ? 'Getting hint...' : 'Hint'}
+                </button>
+                <button type="submit" className="attempt-editor-submit" disabled={submitting || !steps.trim()}>
+                    {submitting ? 'Getting feedback...' : 'Submit'}
+                </button>
+            </div>
         </form>
     )
 }

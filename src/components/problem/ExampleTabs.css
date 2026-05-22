@@ -1,6 +1,5 @@
-/* shared tab UI used by AttemptEditor (editable) and AttemptCard (read-only) */
-
 .example-tabs {
+  flex-shrink: 0;
   border: 1px solid var(--color-border, #e5e7eb);
   border-radius: var(--radius-sm);
   overflow: hidden;
@@ -15,7 +14,6 @@
   gap: 6px;
 }
 
-/* individual tab — mirrors .recent-tab */
 .example-tab {
   display: flex;
   align-items: center;
@@ -51,7 +49,6 @@
   color: #fff;
 }
 
-/* close button — always visible, left border separator */
 .example-tab-close {
   display: flex;
   align-items: center;
@@ -80,7 +77,6 @@
   color: #fff;
 }
 
-/* "+" add tab button */
 .example-tab-add {
   font-size: 18px;
   line-height: 1;
@@ -97,10 +93,11 @@
   background: var(--color-surface);
 }
 
-/* tab content panel */
 .example-tab-content {
   padding: 12px;
   background: var(--color-surface);
+  max-height: 180px;
+  overflow-y: auto;
 }
 
 .example-tab-fields {
