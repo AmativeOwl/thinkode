@@ -34,3 +34,19 @@ export async function getHint(problemTitle, steps, problemUrl) {
   })
   return response.text;
 }
+
+export async function summariseThought(problemTitle, steps, problemUrl) {
+  const userMessage = `Based on my current thinking: ${steps} for the question: ${problemTitle} with URL: ${problemUrl}, can you summarise my approach in a few words?`
+  
+  const response = await ai.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: userMessage,
+    config: {
+      systemInstruction: "Classify the user's approach to the LeetCode problem as one of: Brute Force, Optimised, or Optimal. Then add a 3–5 word summary of the specific technique used. Format: '<Category> — <technique>'. Example: 'Brute Force — nested loop scan'. No other output.",
+      thinkingConfig: {
+        thinkingBudget: 0
+      }
+    }
+  })
+  return response.text;
+}

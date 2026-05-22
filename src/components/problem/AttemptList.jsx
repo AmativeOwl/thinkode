@@ -26,6 +26,7 @@ export default function AttemptList({ attempts, loading }) {
                     {reversed.map((attempt, index) => (
                         <AttemptCard key={attempt.id} attempt={attempt} index={reversed.length - index} />
                     ))}
+                    {console.log(attempts)}
                 </div>
             </div>
         </div>

@@ -7,8 +7,9 @@ import AttemptEditor from "./AttemptEditor"
 import ExamplePanel from "./ExamplePanel"
 import useAttempts from '../../hooks/useAttempts'
 import useProblemExamples from '../../hooks/useProblemExamples'
-import "./ProblemView.css"
 import DescriptionImport from './DescriptionImport'
+import EvolutionTracker from '../evolution/EvolutionTracker'
+import "./ProblemView.css"
 
 export default function ProblemView({ problems, recentProblems, onSelectProblem, onBack, onRemoveRecent }) {
     const { id } = useParams()
@@ -93,7 +94,7 @@ export default function ProblemView({ problems, recentProblems, onSelectProblem,
                     onClose={() => setPanelOpen(false)}
                     tabs={[
                         { id: 'attempts', label: 'Previous Attempts', content: <AttemptList attempts={attempts} loading={loadingFeedback} /> },
-                        { id: 'evolution', label: 'Evolution', content: <p>Coming soon</p> },
+                        { id: 'evolution', label: 'Evolution', content: <p><EvolutionTracker attempts={attempts} /></p> },
                         { id: 'stats', label: 'Stats', content: <p>Coming soon</p> },
                     ]}
                 />
