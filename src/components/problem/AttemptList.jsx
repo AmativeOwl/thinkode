@@ -3,7 +3,6 @@ import AttemptCard from './AttemptCard'
 import './AttemptList.css'
 
 export default function AttemptList({ attempts, loading }) {
-    const [showEvolution, setShowEvolution] = useState(false)
     const cardsRef = useRef(null)
 
     const reversed = [...attempts].reverse()

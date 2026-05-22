@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { getSocraticFeedback, getHint } from '../../libs/gemini.js'
+import { getSocraticFeedback, getHint, summariseThought } from '../../libs/gemini.js'
 import './AttemptEditor.css'
 
 export default function AttemptEditor({ onSubmit, onOpenPanel, onLoadingChange, problemTitle, problemUrl }) {
@@ -28,7 +28,8 @@ export default function AttemptEditor({ onSubmit, onOpenPanel, onLoadingChange, 
 
         try {
             const feedback = await getSocraticFeedback(problemTitle, captured, problemUrl)
-            await onSubmit(captured, feedback)
+            const summary = await summariseThought(problemTitle, captured, feedback, problemUrl)
+            await onSubmit(captured, feedback, summary)
         } catch (err) {
             setError('Something went wrong getting feedback. Please try again.')
             console.error(err)

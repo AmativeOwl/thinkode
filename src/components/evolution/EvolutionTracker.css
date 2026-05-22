@@ -1,0 +1,110 @@
+.evolution-empty {
+  font-size: 13px;
+  color: var(--color-muted);
+  padding: 16px 0;
+}
+
+.evolution-timeline {
+  position: relative;
+  padding: 8px 0;
+}
+
+.evolution-svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.evolution-path {
+  fill: none;
+  stroke: var(--color-muted);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  opacity: 0.45;
+}
+
+.evolution-flower {
+  fill: #000;
+}
+
+.evolution-flower--optimised   { fill: var(--color-medium); }
+.evolution-flower--optimal     { fill: var(--color-easy); }
+.evolution-flower--brute-force { fill: var(--color-hard); }
+
+/* Row: [label + technique] ··· [date pushed right] */
+.evolution-content {
+  position: absolute;
+  left: 28px;
+  right: 0;
+  transform: translateY(-10px);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 15px;
+}
+
+.evolution-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.evolution-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+}
+
+.evolution-label--brute-force { color: var(--color-hard); }
+.evolution-label--optimised   { color: var(--color-medium); }
+.evolution-label--optimal     { color: var(--color-easy); }
+
+.evolution-technique {
+  font-size: 13px;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.evolution-technique:hover {
+  text-decoration: underline;
+  opacity: 0.75;
+}
+
+.evolution-date {
+  font-size: 11px;
+  color: var(--color-muted);
+}
+
+.evolution-group-dot {
+  fill: var(--color-muted);
+  opacity: 0.4;
+}
+
+.evolution-group {
+  position: absolute;
+  left: 28px;
+  padding-left: 15px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  font-size: 11px;
+  color: var(--color-muted);
+  cursor: pointer;
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
+}
+
+.evolution-group:hover {
+  color: var(--color-text);
+}
+
+.evolution-content--sub .evolution-label,
+.evolution-content--sub .evolution-technique,
+.evolution-content--sub .evolution-date {
+  opacity: 0.6;
+}

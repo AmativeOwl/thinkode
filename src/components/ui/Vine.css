@@ -13,6 +13,14 @@
 .vine-path {
   fill: none;
   stroke: #8a7e6a;
-  stroke-width: 2;
+  stroke-width: 1.2;
   stroke-linecap: round;
 }
+
+.vine-flower {
+  fill: #000;
+}
+
+.vine-flower--optimal     { fill: var(--color-easy); }
+.vine-flower--optimised   { fill: var(--color-medium); }
+.vine-flower--brute-force { fill: var(--color-hard); }

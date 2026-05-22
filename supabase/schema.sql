@@ -12,6 +12,7 @@ create table attempts (
   steps text not null,
   feedback text,
   examples jsonb,
+  summary text,
   created_at timestamptz default now()
 );
 
@@ -25,6 +26,7 @@ create table problem_examples (
 
 -- creating indexes to improve query performance
 create index attempts_problem_id_idx on attempts(problem_id);
+create index attempts_problem_summary_idx on attempts(problem_id, summary);
 create index problem_examples_problem_id_idx on problem_examples(problem_id);
 
 -- enforcing rls on database tables to prevent unauthorised access

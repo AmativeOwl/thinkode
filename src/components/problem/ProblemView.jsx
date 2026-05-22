@@ -6,6 +6,7 @@ import Panel from "../ui/Panel"
 import AttemptEditor from "./AttemptEditor"
 import ExamplePanel from "./ExamplePanel"
 import useAttempts from '../../hooks/useAttempts'
+import useEvolutionTimeline from '../../hooks/useEvolutionTimeline'
 import useProblemExamples from '../../hooks/useProblemExamples'
 import DescriptionImport from './DescriptionImport'
 import EvolutionTracker from '../evolution/EvolutionTracker'
@@ -14,17 +15,19 @@ import "./ProblemView.css"
 export default function ProblemView({ problems, recentProblems, onSelectProblem, onBack, onRemoveRecent }) {
     const { id } = useParams()
     const { attempts, addAttempt } = useAttempts(id)
+    const { timeline, fetchGroupAttempts, refresh: refreshTimeline } = useEvolutionTimeline(id)
     const { examples, addExample, updateExample, deleteExample } = useProblemExamples(id)
     const [panelOpen, setPanelOpen] = useState(false)
     const [loadingFeedback, setLoadingFeedback] = useState(false)
     const examplePanelRef = useRef(null)
 
     // snapshot current examples with each attempt submission for historical record
-    async function handleSubmitAttempt(steps, feedback) {
+    async function handleSubmitAttempt(steps, feedback, summary) {
         const snapshot = examples.length
             ? examples.map(e => ({ input: e.input, output: e.output }))
             : null
-        await addAttempt(steps, feedback, snapshot)
+        await addAttempt(steps, feedback, summary, snapshot)
+        refreshTimeline()
     }
 
     const problem = problems.find(p => p.id === id)
@@ -94,7 +97,7 @@ export default function ProblemView({ problems, recentProblems, onSelectProblem,
                     onClose={() => setPanelOpen(false)}
                     tabs={[
                         { id: 'attempts', label: 'Previous Attempts', content: <AttemptList attempts={attempts} loading={loadingFeedback} /> },
-                        { id: 'evolution', label: 'Evolution', content: <p><EvolutionTracker attempts={attempts} /></p> },
+                        { id: 'evolution', label: 'Evolution', content: <p><EvolutionTracker timeline={timeline} fetchGroupAttempts={fetchGroupAttempts} /></p> },
                         { id: 'stats', label: 'Stats', content: <p>Coming soon</p> },
                     ]}
                 />

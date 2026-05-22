@@ -31,10 +31,10 @@ export default function useAttempts(problemId) {
     }, [problemId])
 
     // adds a new attempt to the database for a problem ID, updating the attempts state with the newly added attempt.
-    async function addAttempt(steps, feedback, examples = null) {
+    async function addAttempt(steps, feedback, summary, examples = null) {
         const { data, error } = await supabase
             .from('attempts')
-            .insert({ problem_id: problemId, steps, feedback, examples })
+            .insert({ problem_id: problemId, steps, feedback, examples, summary })
             .select()
             .single()
 
