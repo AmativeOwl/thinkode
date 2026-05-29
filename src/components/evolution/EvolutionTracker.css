@@ -31,7 +31,6 @@
 .evolution-flower--optimal     { fill: var(--color-easy); }
 .evolution-flower--brute-force { fill: var(--color-hard); }
 
-/* Row: [label + technique] ··· [date pushed right] */
 .evolution-content {
   position: absolute;
   left: 28px;
