@@ -1,5 +1,5 @@
-#ifndef ZDP_H
-#define ZDP_H
+#ifndef ZPD_H
+#define ZPD_H
 
 /* Stores attributes relating to a quiz attempt */
 typedef struct Attempt
@@ -18,7 +18,7 @@ typedef struct Question
 
 /* Stores attributes relating to a learner's state:
 - capability: estimates a learner's current skill level (between 0.0 - 1.0)
-used to determine the highest question difficulty they can answer (ZDP)
+used to determine the highest question difficulty they can answer (ZPD)
 - attempt_count: number of attempts used to retrieve establish credibility
 over current user's capability (that is, to ascertain learner's capability
 with utmost certainty)
