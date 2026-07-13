@@ -3,14 +3,14 @@
 
 typedef struct Attempt
 {
-    int question_id;
+    char question_id[37];
     float difficulty;
     int correct;
 } Attempt;
 
 typedef struct Question
 {
-    int id;
+    char id[37];
     float difficulty;
 } Question;
 
