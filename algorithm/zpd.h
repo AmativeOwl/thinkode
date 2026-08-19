@@ -1,10 +1,12 @@
 #ifndef ZDP_H
 #define ZDP_H
 
+#define ID_LENGTH 37
+
 /* Stores attributes relating to a quiz attempt */
 typedef struct Attempt
 {
-    char question_id[37];
+    char question_id[ID_LENGTH];
     float difficulty;
     int correct;
 } Attempt;
@@ -12,7 +14,7 @@ typedef struct Attempt
 /* Stores attributes relating to a quiz question */
 typedef struct Question
 {
-    char id[37];
+    char id[ID_LENGTH];
     float difficulty;
 } Question;
 
