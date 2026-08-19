@@ -16,6 +16,7 @@ typedef struct Question
 {
     char id[ID_LENGTH];
     float difficulty;
+    int seen_count;
 } Question;
 
 /* Stores attributes relating to a learner's state:

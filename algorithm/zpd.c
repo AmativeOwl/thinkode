@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
+#include <math.h>
 #include "zpd.h"
 
 #define K 5
@@ -76,6 +78,38 @@ float score_zpd_fit(LearnerState *state, Question *q)
     return score;
 }
 
+/*
+Selects the next question from the pool that best fits the learner's current ZPD.
+
+Questions are scored using score_zpd_fit and the highest scoring question is selected.
+In the case of a tie, the question with the lowest seen_count is preferred to ensure
+variety and avoid repeatedly serving the same question. Once selected, the question's
+seen_count is incremented.
+
+Returns a pointer to the best fitting question, or NULL if the pool is empty.
+*/
 Question *select_next_question(LearnerState *state, Question *pool, int pool_size)
 {
+    float best_score = -1.0f;
+    int min_seen = INT_MAX;
+    Question *best = NULL;
+
+    for (int i = 0; i < pool_size; i++)
+    {
+        float score = score_zpd_fit(state, &pool[i]);
+
+        if (score > best_score || (score == best_score && pool[i].seen_count < min_seen))
+        {
+            best_score = score;
+            best = &pool[i];
+            min_seen = pool[i].seen_count;
+        }
+    }
+
+    if (best)
+    {
+        best->seen_count++;
+    }
+
+    return best;
 }
