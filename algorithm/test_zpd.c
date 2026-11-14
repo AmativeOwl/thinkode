@@ -63,7 +63,7 @@ static void test_score_zpd_fit(void)
 {
     printf("score_zpd_fit\n");
     LearnerState s = {0.5f, 0};
-    Question ideal = make_question("ideal", 0.55f); /* Capability 0.5 * IDEAL_DIFF_MULT 1.1 */
+    Question ideal = make_question("ideal", 0.6f); /* Capability 0.5 + ZPD_STRETCH 0.1 */
     Question far = make_question("far", 1.0f);
 
     CHECK(fabsf(score_zpd_fit(&s, &ideal) - 1.0f) < 1e-5f, "ideal difficulty scores ~1.0");
@@ -71,7 +71,7 @@ static void test_score_zpd_fit(void)
     CHECK(score_zpd_fit(&s, &far) >= 0.0f, "score never negative");
 }
 
-/* Define a test function to check that the best-fitting question is selected, ties go to the least-seen question and an empty pool returns NULL */
+/* Define a test function to check that the best-fitting question is selected, heavily-seen questions are penalised and an empty pool returns NULL */
 static void test_select_next_question(void)
 {
     printf("select_next_question\n");
@@ -81,18 +81,18 @@ static void test_select_next_question(void)
 
     Question pool[3] = {
         make_question("easy", 0.1f),
-        make_question("ideal", 0.55f),
+        make_question("ideal", 0.6f),
         make_question("hard", 0.95f),
     };
     Question *q = select_next_question(&s, pool, 3);
     CHECK(q == &pool[1], "picks the best ZPD fit");
     CHECK(pool[1].seen_count == 1, "selected question's seen_count increments");
 
-    /* Two equally good questions: the less-seen one should win */
-    Question tie[2] = {make_question("a", 0.55f), make_question("b", 0.55f)};
+    /* Two equally good questions: the heavily-seen one should lose to the fresh one */
+    Question tie[2] = {make_question("a", 0.6f), make_question("b", 0.6f)};
     tie[0].seen_count = 3;
     q = select_next_question(&s, tie, 2);
-    CHECK(q == &tie[1], "tie broken by lowest seen_count");
+    CHECK(q == &tie[1], "heavily-seen question loses to an equally good fresh one");
 }
 
 /* Define a simulation of a learner who answers every question correctly, printing how capability and certainty evolve */

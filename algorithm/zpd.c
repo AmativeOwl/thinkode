@@ -6,7 +6,7 @@
 #include "zpd.h"
 
 #define K 5
-#define LEARNING_RATE 0.1
+#define LEARNING_RATE 0.1f
 #define ZPD_STRETCH 0.1f
 #define SEEN_PENALTY 0.05f
 
@@ -92,10 +92,13 @@ float score_zpd_fit(LearnerState *state, Question *q)
 /*
 Selects the next question from the pool that best fits the learner's current ZPD.
 
-Questions are scored using score_zpd_fit and the highest scoring question is selected.
-In the case of a tie, the question with the lowest seen_count is preferred to ensure
-variety and avoid repeatedly serving the same question. Once selected, the question's
-seen_count is incremented.
+Questions are scored using score_zpd_fit, minus a penalty of SEEN_PENALTY for each time
+the question has already been served, and the highest scoring question is selected:
+  score = score_zpd_fit(state, q) - SEEN_PENALTY * q->seen_count
+
+The penalty ensures variety and avoids repeatedly serving the same question: a slightly
+worse fitting question that has not been seen will eventually overtake one that has been
+served many times. Once selected, the question's seen_count is incremented.
 
 Returns a pointer to the best fitting question, or NULL if the pool is empty.
 */
