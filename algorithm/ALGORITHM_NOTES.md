@@ -1,7 +1,7 @@
 Readings: 
 1. FSRS (Free Spaced Repetition Scheduler) Algorithm Wiki - https://github.com/open-spaced-repetition/awesome-fsrs/wiki/The-Algorithm
 
-Serves as a reference for the practical implementation of the algorithm, incorporating analysis on the DSR (Difficulty, Stability, Resilience) model, equations and the calculation of spaced intervals.  
+Serves as a reference for the practical implementation of the algorithm, incorporating analysis on the DSR (Difficulty, Stability, Retrievability) model, equations and the calculation of spaced intervals.  
 
 2. IEEE Paper: "Optimising Spaced Repetition Schedule by Capturing the Dynamics of Memory" - https://www.scribd.com/document/901213478/3534678-3539081
 
