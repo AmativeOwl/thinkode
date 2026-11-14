@@ -37,6 +37,9 @@ void update_capability(LearnerState *state, Attempt *attempt)
     else
         state->capability -= LEARNING_RATE * (1 - attempt->difficulty) * (1 - certainty);
 
+    /* Clamp the results between 0.0 and 1.0 */
+    state->capability = (state->capability < 0) ? 0 : (state->capability > 1) ? 1 : state->capability;
+
     state->attempt_count++;
 }
 
