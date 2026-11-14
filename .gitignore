@@ -26,3 +26,7 @@ dist-ssr
 .env
 node_modules/
 .claude/
+# C build outputs
+algorithm/*.o
+algorithm/test_zpd
+algorithm/test_zpd.exe
