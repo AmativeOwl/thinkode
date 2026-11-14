@@ -2,11 +2,13 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <math.h>
+#include <float.h>
 #include "zpd.h"
 
 #define K 5
 #define LEARNING_RATE 0.1
-#define IDEAL_DIFF_MULT 1.1f
+#define ZPD_STRETCH 0.1f
+#define SEEN_PENALTY 0.05f
 
 void update_capability(LearnerState *state, Attempt *attempt);
 float get_certainty(LearnerState *state);
@@ -21,7 +23,7 @@ The update magnitude is scaled by two factors:
     a larger capability increase than an easy one. Conversely, an incorrect answer on an
     easy question (low difficulty, so 1 - difficulty is high) produces a large decrease.
   2. Learning rate decay: certainty is derived from attempt_count and approaches 1.0 as
-    more attempts are observed. Multiplying by (1 - certainty) ensures early attempts shift
+    more attempts are observed. Multiplying by (1 - certainty) ensures early attempts
     shift capability more dramatically while later attempts produce smaller, more stable
     updates.
 
@@ -61,7 +63,9 @@ Scores how well a question fits the learner's current Zone of Proximal Developme
 
 A perfect fit occurs when the question difficulty is slightly above the learner's current
 capability and challenging enough to promote growth but not so far beyond reach that it
-becomes discouraging. The ideal difficulty is defined as capability * IDEAL_DIFF_MULT.
+becomes discouraging. The ideal difficulty is defined as capability + ZPD_STRETCH, where
+ZPD_STRETCH is a small positive value that nudges the ideal difficulty slightly above the 
+learner's current capability.
 
 The score is calculated as 1 - distance from the ideal, constrained to a minimum of 0:
   score = max(0, 1 - fabs(q->difficulty - ideal))
@@ -71,8 +75,12 @@ becomes either too easy or too difficult relative to the learner's current capab
 */
 float score_zpd_fit(LearnerState *state, Question *q)
 {
-    float ideal = state->capability * IDEAL_DIFF_MULT;
-    float distance = fabs(q->difficulty - ideal);
+    float ideal = state->capability + ZPD_STRETCH;
+
+    if (ideal > 1.0f)
+        ideal = 1.0f; 
+
+    float distance = fabsf(q->difficulty - ideal);
     float score = 1.0f - distance;
 
     if (score < 0)
@@ -93,19 +101,17 @@ Returns a pointer to the best fitting question, or NULL if the pool is empty.
 */
 Question *select_next_question(LearnerState *state, Question *pool, int pool_size)
 {
-    float best_score = -1.0f;
-    int min_seen = INT_MAX;
+    float best_score = -FLT_MAX;
     Question *best = NULL;
 
     for (int i = 0; i < pool_size; i++)
     {
-        float score = score_zpd_fit(state, &pool[i]);
+        float score = score_zpd_fit(state, &pool[i]) - SEEN_PENALTY * pool[i].seen_count;
 
-        if (score > best_score || (score == best_score && pool[i].seen_count < min_seen))
+        if (score > best_score)
         {
             best_score = score;
             best = &pool[i];
-            min_seen = pool[i].seen_count;
         }
     }
 
